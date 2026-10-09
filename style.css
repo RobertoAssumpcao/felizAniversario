@@ -26,7 +26,13 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--pink); outline-
 .skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; padding: 12px 18px; background: var(--lilac); color: var(--bg); transform: translateY(-160%); clip-path: inset(50%); }
 .skip-link:focus { transform: none; clip-path: none; }
 .starfield { position: absolute; inset: 0 0 auto; height: 880px; overflow: hidden; pointer-events: none; opacity: .65; background-image: radial-gradient(circle at 12% 19%, #b79aff 0 1px, transparent 1.5px), radial-gradient(circle at 85% 14%, #edb4d2 0 1px, transparent 1.5px), radial-gradient(circle at 25% 60%, #b79aff 0 1px, transparent 1.5px), radial-gradient(circle at 76% 52%, #b79aff 0 1px, transparent 1.5px), radial-gradient(circle at 87% 76%, #f6f0ff 0 .8px, transparent 1.3px), radial-gradient(circle at 8% 83%, #edb4d2 0 .8px, transparent 1.3px), radial-gradient(circle at 47% 8%, #b79aff 0 .8px, transparent 1.3px); }
-.background-star { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: var(--lilac); opacity: .35; animation: twinkle 6s ease-in-out var(--delay) 2 alternate; }
+.living-sky { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: .8; }
+main { position: relative; }
+.masthead-actions { display: flex; align-items: center; gap: 16px; }
+.effects-toggle { align-items: center; gap: 7px; min-height: 44px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 20px; background: #171021a8; color: var(--muted); font: 9px var(--mono); }
+.effects-toggle:hover { border-color: #b79aff66; color: var(--white); }
+.effects-icon { color: var(--lilac); font-size: 16px; }
+.effects-toggle[aria-pressed="false"] .effects-icon { opacity: .4; }
 .masthead { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; padding: 25px 22px; display: flex; justify-content: space-between; align-items: center; }
 .tiny-mark { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; font-family: var(--mono); font-size: 10px; letter-spacing: .7px; color: var(--muted); }
 .tiny-mark span { color: var(--lilac); font-size: 20px; }
@@ -94,6 +100,8 @@ h1 em { display: inline-block; margin-top: 6px; font-size: 1.65em; font-style: n
 .primary-button:disabled { cursor: default; }
 .button-spark { font-size: 19px; font-weight: 400; }
 .hero-footnote { display: block; margin-top: 15px; color: #a89ab8; font-family: var(--mono); font-size: 10px; }
+.sky-hint { justify-content: center; align-items: center; gap: 8px; max-width: 360px; margin: 22px 10px 0; color: #b2a1c5; font: 9px/1.8 var(--mono); }
+.sky-hint > span:first-child { flex-shrink: 0; color: var(--lilac); font-size: 17px; }
 .hero-bottom { position: absolute; bottom: 25px; left: 22px; right: 22px; display: flex; justify-content: space-between; align-items: center; font-size: 8px; letter-spacing: 1.2px; color: #9f91b0; }
 .hero-bottom span:nth-child(2) { color: var(--lilac); font-size: 19px; }
 .surprise { position: relative; max-width: 900px; margin: 28px auto 0; padding: 0 20px; }
@@ -118,6 +126,11 @@ h1 em { display: inline-block; margin-top: 6px; font-size: 1.65em; font-style: n
 .keepsakes h2 em { display: block; color: var(--lilac); font-weight: 500; font-style: normal; }
 .keepsake-grid { display: grid; gap: 0; }
 .keepsake { display: grid; grid-template-columns: 115px 1fr; grid-template-rows: auto auto; text-align: left; align-content: center; column-gap: 14px; padding: 22px 0; border-top: 1px solid var(--line); }
+.keepsake { position: relative; transform: perspective(700px) rotateX(var(--card-rx, 0deg)) rotateY(var(--card-ry, 0deg)); transition: transform .25s ease-out, border-color .25s; }
+.keepsake:hover, .keepsake:focus-within { border-color: #b79aff66; }
+.keepsake-trigger { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; border-radius: 12px; background: transparent; }
+.keepsake .keepsake-note { grid-column: 1 / -1; margin: 14px 0 0; padding: 12px 14px; border-left: 1px solid #b79aff66; border-radius: 0 8px 8px 0; background: #b79aff08; color: #d2bde9; font-size: 11px; line-height: 1.8; text-align: left; }
+.keepsake-hint { justify-content: center; margin: 24px 0 0; font: 9px/1.8 var(--mono); color: var(--muted); }
 .keepsake-art { position: relative; grid-row: 1 / 3; width: 110px; height: 95px; align-self: center; }
 .keepsake h3 { margin: 16px 0 8px; font-family: var(--display); font-weight: 500; font-size: 18px; }
 .keepsake p { margin: 0 0 12px; color: var(--muted); font-size: 11px; line-height: 1.85; }
@@ -150,6 +163,23 @@ h1 em { display: inline-block; margin-top: 6px; font-size: 1.65em; font-style: n
 .icecream-cup::after { content: "✧"; position: absolute; inset: 0; text-align: center; padding-top: 3px; color: #e6cff5; font-size: 17px; }
 .icecream-spoon { position: absolute; top: 5px; left: 84px; width: 5px; height: 30px; border-radius: 8px; background: #bcafce; transform: rotate(26deg); z-index: -1; }
 .icecream-star { position: absolute; top: 12px; left: 13px; font-size: 14px; color: var(--pink); }
+.wish { position: relative; isolation: isolate; overflow: hidden; margin: 0 0 48px; padding: 42px 18px 30px; border: 1px solid var(--line); border-radius: 16px; background: radial-gradient(ellipse at 50% 60%, #56337630, transparent 68%), #100c17; text-align: center; }
+.wish h2 { position: relative; margin: 0 0 14px; font-family: var(--display); font-size: 26px; font-weight: 500; line-height: 1.4; }
+.wish h2 em { display: block; color: var(--lilac); font-style: normal; }
+.wish-intro { position: relative; color: var(--muted); font-size: 12px; line-height: 1.9; }
+.wish-button { position: relative; flex-direction: column; align-items: center; gap: 16px; min-width: 170px; margin: 10px 0 0; padding: 16px; border: 0; border-radius: 16px; background: transparent; color: var(--white); }
+.wish-star { display: grid; place-items: center; width: 84px; height: 84px; border: 1px solid #b79aff40; border-radius: 50%; background: radial-gradient(circle, #b79aff18, transparent 70%); box-shadow: 0 0 36px #b79aff10; color: var(--lilac); font-size: 57px; line-height: 1; transition: transform .3s, box-shadow .3s, background .3s; }
+.wish-button:hover .wish-star { transform: rotate(12deg) scale(1.08); box-shadow: 0 0 45px #b79aff26; }
+.wish-button-label { font: 10px var(--mono); letter-spacing: .5px; }
+.wish.is-made .wish-star { color: #e6d9ff; background: radial-gradient(circle, #b79aff35, #b79aff08 65%); box-shadow: 0 0 55px #b79aff25; }
+.wish-message { position: relative; max-width: 360px; min-height: 3.6em; margin: 17px auto 0; color: #bbaccb; font-size: 12px; line-height: 1.8; }
+.wish.is-made .wish-message { color: #decef0; }
+.wish-orbit { position: absolute; z-index: -1; width: 340px; height: 140px; left: calc(50% - 170px); bottom: 106px; border: 1px solid #b79aff15; border-radius: 50%; transform: rotate(-20deg); }
+.wish-orbit span { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #b79aff99; box-shadow: 0 0 9px #b79aff; }
+.wish-orbit span:first-child { left: 31px; top: 24px; }.wish-orbit span:last-child { right: 31px; bottom: 24px; }
+.paw-print { position: fixed; top: 0; left: 0; width: 33px; height: 36px; color: var(--lilac); }
+.paw-print svg { display: block; width: 100%; height: 100%; }
+.effects-paused *, .effects-paused *::before, .effects-paused *::after { animation: none !important; transition: none !important; }
 .last-detail { position: relative; padding: 29px 20px; border-radius: 12px; border: 1px solid var(--line); background: radial-gradient(ellipse at 50% 0, #31204f55, #130f1d); text-align: center; }
 .detail-star { display: block; margin-bottom: 13px; font-size: 30px; color: var(--lilac); }
 .detail-button { justify-content: center; align-items: center; gap: 25px; border: 0; border-bottom: 1px solid #b79aff66; min-height: 48px; padding: 8px 2px; color: var(--white); background: transparent; font-family: var(--display); font-size: 21px; transition: color .2s; }
@@ -174,7 +204,6 @@ h1 em { display: inline-block; margin-top: 6px; font-size: 1.65em; font-style: n
 .particle { position: fixed; top: 0; left: 0; opacity: 0; color: var(--particle-color, var(--lilac)); font-size: var(--particle-size, 13px); will-change: transform, opacity; }
 .confetti { width: 4px; height: 8px; border-radius: 1px; background: var(--particle-color); }
 @keyframes float { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-8px) rotate(3deg); } }
-@keyframes twinkle { from { opacity: .15; } to { opacity: .7; } }
 @keyframes ghost-wiggle { 0%, 100% { transform: rotate(0); } 20% { transform: translateY(-10px) rotate(-13deg); } 45% { transform: rotate(12deg); } 70% { transform: translateY(-5px) rotate(-7deg); } }
 @keyframes button-shine { 0%, 75% { transform: translateX(-250%) rotate(25deg); } 100% { transform: translateX(750%) rotate(25deg); } }
 @keyframes letter-reveal { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
@@ -186,6 +215,11 @@ h1 em { display: inline-block; margin-top: 6px; font-size: 1.65em; font-style: n
   h1 { font-size: 32px; }.eyebrow { font-size: 9px; letter-spacing: 0; }.intro { font-size: 12px; }
   .surprise { padding-inline: 15px; }.letter { padding-inline: 20px; }.letter-topline { font-size: 7px; letter-spacing: .7px; }
   .keepsake { grid-template-columns: 100px 1fr; column-gap: 9px; }.keepsake-art { transform: scale(.9); transform-origin: left center; }.keepsake h3 { font-size: 18px; }.keepsake p { font-size: 10px; }
+}
+@media (max-width: 479px) {
+  .masthead-actions { gap: 9px; }.effects-toggle { width: 36px; min-height: 36px; padding: 0; justify-content: center; }.effects-label { display: none; }
+  .edition { font-size: 8px; }.sky-hint { max-width: 275px; font-size: 8px; }
+  .hero { min-height: max(630px, calc(100svh - 75px)); }
 }
 @media (max-width: 599px) and (max-height: 740px) {
   .hero { padding-top: 10px; }
@@ -204,6 +238,7 @@ h1 em { display: inline-block; margin-top: 6px; font-size: 1.65em; font-style: n
   .keepsakes { margin: 76px 0 57px; }.keepsakes h2 { font-size: 32px; }.keepsakes h2 em { display: inline; }.keepsake-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; }
   .keepsake { display: block; padding: 26px 0 0; text-align: center; }.keepsake-art { margin: 0 auto 10px; }.keepsake h3 { font-size: 20px; margin-top: 12px; }.keepsake p { font-size: 12px; }
   .last-detail { padding: 35px; }.postscript p { font-size: 25px; }.closing { margin: 56px 0 65px; font-size: 26px; }.closing em { font-size: 20px; }.footer { padding-inline: 35px; font-size: 10px; }
+  .wish { padding: 48px 35px 34px; margin-bottom: 57px; }.wish h2 { font-size: 32px; }.wish h2 em { display: inline; }.wish-intro, .wish-message { font-size: 13px; }
 }
 @media (min-width: 1000px) {
   .hero { min-height: 820px; padding-top: 24px; }.night-art { margin-bottom: 28px; }h1 { font-size: 72px; }
