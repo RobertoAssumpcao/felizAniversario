@@ -11,8 +11,9 @@ No celular, abra um endereço de hospedagem estática ou transfira a pasta intei
 ## Experiência
 
 - **Abrir sua surpresa:** o fantasma atravessa a tela em menos de um segundo com um rastro de estrelas. A carta aparece e recebe o foco. O botão passa a permitir reler a carta.
-- **Fantasminha:** toque ou use Enter/Espaço para uma pequena dança com estrelas.
-- **Um último detalhe...:** revela o convite do sorvete com confetes leves, uma única vez por visita.
+- **Céu interativo:** toque na lua ou use Enter/Espaço para soltar uma estrela cadente. No desktop, lua e órbitas respondem suavemente ao mouse com uma pequena diferença de profundidade.
+- **Fantasminha:** toque ou use Enter/Espaço para revelar “Gaia” em uma constelação desenhada com estrelas, acompanhada de uma pequena dança e um pulso orbital. O céu volta ao normal depois de alguns segundos.
+- **Um último detalhe...:** revela o convite do sorvete com estrelas cadentes e algumas partículas leves, uma única vez por visita.
 - **Nuvem no rodapé:** abre a brincadeira do Instituto Cobra Coral. Outro toque, um toque fora ou Escape fecha o recado.
 - Todas as animações respeitam a configuração de movimento reduzido do sistema. Com ela ativa, a carta e os recados aparecem imediatamente, sem confetes ou deslocamentos animados.
 - Sem JavaScript, a carta, o PS e a brincadeira continuam visíveis; os botões interativos são ocultados.
@@ -56,4 +57,4 @@ Verificado no Edge local com abertura direta por `file://`, nas resoluções 320
 
 Abra a página em 320, 360, 390 e 430 px e também no desktop. Confira o botão da carta, o fantasma, o PS, a nuvem, navegação por Tab e a configuração de movimento reduzido. O CSS organiza as lembranças em linhas no celular e em três colunas a partir de 600 px.
 
-Os efeitos são limitados a poucos elementos, animam `transform` e `opacity` e se removem ao terminar. Ao sair da aba, os efeitos em andamento são cancelados. Não há áudio, armazenamento local, formulários ou chamadas de rede.
+Os efeitos são limitados a poucos elementos e se removem ao terminar. O movimento de profundidade agenda apenas um quadro por atualização do mouse; não há loop permanente. As estrelas e os pulsos animam `transform` e `opacity`; a constelação usa traços SVG. Ao sair da aba, os efeitos em andamento são cancelados. Não há áudio, armazenamento local, formulários ou chamadas de rede.
